@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>To the moon| Login</title>
+    <title>To the moon | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static "bower_components/Ionicons/css/ionicons.min.css" %}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static "dist/css/AdminLTE.min.css" %}">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,6 +39,13 @@
 
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
+                {% if form.subject.errors %}
+                    <ol>
+                    {% for error in form.subject.errors %}
+                        <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
                 <div class="form-group has-feedback">
                     <input type="text" name="username" class="form-control" placeholder="Nome de usuário">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -59,7 +66,7 @@
 
             <a href="#">Esqueci minha senha</a>
             <br>
-            <a href="register.html" class="text-center">Não possui um conta? Crie aqui</a>
+            <a href="{% url 'register' %}" class="text-center">Não possui uma conta? Crie aqui</a>
 
         </div>
         <!-- /.login-box-body -->
