@@ -3,9 +3,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout
 from django.views.generic import FormView, RedirectView
 
-class LoginView(FromView):
+class LoginView(FormView):
     form_class = AuthenticationForm
     redirect_field_name = REDIRECT_FIELD_NAME
+    template_name = 'home/login.html'
 
     def form_valid(self, form):
         auth_login(self.request, form.get_user())
